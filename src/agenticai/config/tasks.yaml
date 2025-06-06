@@ -1,17 +1,67 @@
-research_task:
+accounting_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Collect and consolidate financial data from {topic}.
+    Validate the data integrity and prepare it for further analysis.
+    Generate a preliminary financial analysis report highlighting key metrics
+    such as revenue, expenses, and cash flow patterns.
+    Ensure that all data follows standard accounting principles and is consistent
+    across different sources.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A structured financial report with summarized financial statements,
+    trend highlights, and any detected discrepancies or irregularities.
+  agent: accounting_agent
 
-reporting_task:
+analyst_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Perform detailed financial analyses comparing actual results against budget
+    and forecasts for {topic}. Identify variances, quantify their impact, and investigate root causes.
+    Prepare clear summaries and visualizations of these comparisons to support decision-making.
+    Highlight any significant deviations and provide actionable insights.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A comprehensive variance analysis report including charts or tables showing
+    actual vs budget/forecast comparisons, variance explanations, and recommendations.
+  agent: analyst_agent
+  context: ["accounting_task"]
+
+tax_task:
+  description: >
+    Conduct a thorough audit of the financial data for tax compliance of {topic}.
+    Review calculations for accuracy and conformity with current tax regulations.
+    Add necessary footnotes and references to applicable tax laws or regulations.
+    Flag any potential compliance risks and suggest corrective measures.
+  expected_output: >
+    A detailed tax audit report with verified tax figures, compliance notes,
+    and regulatory references clearly annotated.
+  agent: tax_agent
+  context: ["analyst_task"]
+
+review_task:
+  description: >
+    Validate the final financial report by checking the accuracy of reported figures
+    and consistency with internal control documentation and match them with {topic}.
+    Assess whether internal control procedures have been followed correctly
+    and identify any gaps or weaknesses.
+    Provide an independent assurance that the report adheres to organizational policies
+    and regulatory standards.
+  expected_output: >
+    An internal audit validation report confirming the integrity of the financial report
+    and internal control compliance, including any recommendations for improvement.
+  agent: reviewer_agent
+  context: ["tax_task"]
+
+
+lead_task:
+  description: >
+    Conduct the final review and sign-off on the report if it complies with the data of {topic}.
+    Ensure all data collected, analyses performed, and reports generated
+    by the team meet the highest standards of accuracy and completeness.
+    Verify that compliance, audit, and tax reviews are integrated properly.
+    Provide strategic feedback or request revisions where necessary to guarantee
+    the report supports sound decision-making. User {name} as your name and {company_name}
+    as Company/Firm Name. Follow through with these for any and all signatures 
+    required.
+  expected_output: >
+    A finalized, approved financial analysis report ready for distribution,
+    along with a summary of key observations from the review process.
+  agent: lead_agent
+  context: ["review_task"]
