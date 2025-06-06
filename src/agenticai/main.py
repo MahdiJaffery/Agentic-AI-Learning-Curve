@@ -4,7 +4,7 @@ import warnings
 
 from datetime import datetime
 
-from siriil.crew import Siriil
+from agenticai.crew import AgenticAI
 
 import pandas as pd
 
@@ -39,7 +39,7 @@ def run():
     }
     
     try:
-        Siriil().crew().kickoff(inputs=inputs)
+        AgenticAI().crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
@@ -53,7 +53,7 @@ def train():
         'current_year': str(datetime.now().year)
     }
     try:
-        Siriil().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+        AgenticAI().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
@@ -63,7 +63,7 @@ def replay():
     Replay the crew execution from a specific task.
     """
     try:
-        Siriil().crew().replay(task_id=sys.argv[1])
+        AgenticAI().crew().replay(task_id=sys.argv[1])
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
@@ -78,7 +78,7 @@ def test():
     }
     
     try:
-        Siriil().crew().test(n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs)
+        AgenticAI().crew().test(n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")

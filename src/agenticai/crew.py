@@ -6,7 +6,7 @@ from typing import List
 import pandas as pd
 
 @CrewBase
-class Siriil():
+class AgenticAI():
     agents: List[BaseAgent]
     tasks: List[Task]
 
